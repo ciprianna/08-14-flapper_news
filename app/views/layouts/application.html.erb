@@ -2,13 +2,100 @@
 <html>
 <head>
   <title>FlapperNews</title>
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.10/angular-ui-router.js"></script>
   <%= stylesheet_link_tag    'application', media: 'all' %>
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
 </head>
-<body>
+<body ng-app="flapperNews">
 
-<%= yield %>
+  <!-- css grid layout base -->
+  <div class="row">
+    <!-- divide layout into columns of 6, and offset everything in this div by 3 cols -->
+    <div class="col-md-6 col-md-offset-3">
+      <!-- place where an angular template should be rendered -->
+      <ui-view></ui-view>
+    </div>
+  </div>
+    <!-- template for home page -->
+    <script type="text/ng-template" id="/home.html">
+      <div class="page-header">
+        <h1>Flapper News</h1>
+      </div>
+
+      <!-- // listing of all posts, ordered by most upvotes -->
+      <div ng-repeat="post in posts | orderBy: '-upvotes'">
+        <!-- // upvotes incremented by clicking on thumbs up icon -->
+        <span class="glyphicon glyphicon-thumbs-up" ng-click="incrementUpvotes(post)"></span>
+        <!-- // number of upvotes for a given post -->
+        {{ post.upvotes }}
+        <span style="font-size:20px; margin-left:10px;">
+          <!-- // makes the title an active link if a link exists -->
+          <a ng-show="post.link" href="{{ post.link }}">{{post.title}}</a>
+          <!-- // hides link style if no link exists -->
+          <span ng-hide="post.link">
+            {{post.title}}
+          </span>
+        </span>
+
+        <!-- // links to the show page for a given post, by index number; -->
+        <!-- // index determined by ng-repeat method when posts are listed -->
+        <span>
+          <a href="#/posts/{{$index}}">Comments</a>
+        </span>
+      </div>
+
+      <!-- // Form to submit a new post -->
+      <form ng-submit="addPost()" style="margin-top:30px;">
+        <h3>Add a new post</h3>
+        <div class="form-group">
+          <input class="form-control" type="text" placeholder="Title" ng-model="title">
+        </div>
+        <div class="form-group">
+          <input class="form-control" type="text" placeholder="Link" ng-model="link">
+        </div>
+        <!-- // Buttons uses app.js's addPost method -->
+        <button class="btn btn-primary" ng-click="addPost()">Post</button>
+      </form>
+    </script>
+
+    <!-- Posts template -->
+    <script type="text/ng-template" id="/posts.html">
+      <div class="page-header">
+        <h3>
+        <!-- //if a link is given, makes the title of the post an active link -->
+          <a ng-show="post.link" href="{{post.link}}">
+            {{post.title}}
+          </a>
+          <span ng-hide="post.link">
+            {{post.title}}
+          </span>
+        </h3>
+      </div>
+
+      <!-- // post comments listed in descending order by upvotes -->
+      <div ng-repeat="comment in post.comments | orderBy: '-upvotes'">
+        <!-- // can click on thumbs-up icon to increment the upvotes -->
+        <span class="glyphicon glyphicon-thumbs-up" ng-click="incrementUpvotes(comment)"></span>
+        <!-- // a comment's votes and author -->
+        {{comment.upvotes}} - by {{comment.author}}
+        <span style="font-size: 20px; margin-left: 10px;">
+          <!-- // content -->
+          {{comment.body}}
+        </span>
+      </div>
+
+      <!-- // form to add a comment to a post -->
+      <form ng-submit="addComment()" style="margin-top:30px">
+        <h3>Add a new comment</h3>
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Comment" ng-model="body">
+        </div>
+        <button type="submit" class="btn btn-primary">Post</button>
+      </form>
+    </script>
 
 </body>
 </html>
