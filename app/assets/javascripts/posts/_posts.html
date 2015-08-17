@@ -17,7 +17,7 @@
     <!-- // can click on thumbs-up icon to increment the upvotes -->
     <span class="glyphicon glyphicon-thumbs-up" ng-click="incrementUpvotes(comment)"></span>
     <!-- // a comment's votes and author -->
-    {{comment.upvotes}} - by {{comment.author}}
+    {{comment.upvotes}} - by {{comment.user.username}}
     <span style="font-size: 20px; margin-left: 10px;">
       <!-- // content -->
       {{comment.body}}
