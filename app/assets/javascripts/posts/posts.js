@@ -27,7 +27,13 @@ angular.module('flapperNews')
     });
   }
   o.addComment = function(id, comment) {
-    return $http.post('/posts' + id + '/comments.json', comment);
+    return $http.post('/posts/' + id + '/comments.json', comment);
+  }
+  o.upvoteComment = function(post, comment) {
+    return $http.put('/posts/' + post.id + '/comments/' + id + '/upvote.json')
+      .success(function(data){
+        comment.upvotes += 1;
+      });
   }
   return o;
 }]);

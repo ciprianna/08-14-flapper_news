@@ -22,6 +22,9 @@ angular.module('flapperNews')
       });
       // Reset the input to empty
       $scope.body = '';
-    }
+    };
+    $scope.incrementUpvotes = function(comment){
+      posts.upvoteComment(post, comment);
+    };
   }
 ]);
