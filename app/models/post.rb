@@ -4,6 +4,6 @@ class Post < ActiveRecord::Base
 
   # Using the super method to return json with a post's comments
   def as_json(options = {})
-    super(options.merge(include: :comments))
+    super(options.merge(include: [:user, comments: {include: :user}]))
   end
 end
