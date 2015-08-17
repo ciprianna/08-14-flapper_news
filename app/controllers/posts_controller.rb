@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
-
+  before_filter :authenticate_user!, only: [:create, :upvote]
+  
   # Using respond_with will return JSON, as specified in the ApplicationController
   def index
     respond_with Post.all
