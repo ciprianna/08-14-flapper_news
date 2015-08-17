@@ -5,4 +5,4 @@ angular.module('flapperNews')
     posts: []
   };
   return o;
-}])
+}]);
