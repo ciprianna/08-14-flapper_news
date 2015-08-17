@@ -52,7 +52,7 @@ angular.module('flapperNews', ['ui.router', 'templates', 'Devise'])
         url: '/register',
         templateUrl: 'auth/_register.html',
         controller: 'AuthCtrl',
-        onEnter: {
+        onEnter: [
           '$state',
           'Auth',
           function($state, Auth) {
@@ -60,7 +60,7 @@ angular.module('flapperNews', ['ui.router', 'templates', 'Devise'])
               $state.go('home');
             })
           }
-        }
+        ]
       })
       // what to do for everything else
       $urlRouterProvider.otherwise('home'); // Routes all bad paths to home
