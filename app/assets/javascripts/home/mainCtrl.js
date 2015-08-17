@@ -13,18 +13,11 @@ angular.module('flapperNews')
       // If title is nil or empty, don't do anything
       if(!$scope.title || $scope.title === '') {return;}
       // push to the $scope.posts Array
-      $scope.posts.push({
+      posts.create({
         // $scope.title (defined in model - html tag)
         title: $scope.title,
         // $scope.innk (defined in model)
-        link: $scope.link,
-        // upvotes set to 0
-        upvotes: 0,
-        // mock data for testing
-        comments: [
-          {author: 'Cat', body: 'Purrrrific!', upvotes: 0},
-          {author: 'Kitten', body: 'Meowzors!', upvotes: 0}
-        ]
+        link: $scope.link
       });
       // reset input boxes to empty
       $scope.title = '';
