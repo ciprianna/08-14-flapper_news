@@ -35,3 +35,5 @@ group :development, :test do
 end
 
 gem 'sprockets', '2.12.3'
+
+gem 'angular-rails-templates'
