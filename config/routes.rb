@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  devise_for :users
   root to: 'application#angular'
 
   # Limits all of the routes to only the ones necessary
