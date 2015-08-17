@@ -25,7 +25,12 @@ angular.module('flapperNews', ['ui.router', 'templates'])
       .state('posts', {
         url: '/posts/{id}', // Single bracket means the id is a param
         templateUrl: 'posts/_posts.html',
-        controller: 'PostsCtrl'
+        controller: 'PostsCtrl',
+        resolve: {
+          post: ['$stateParams', 'posts', function($stateParams, posts) {
+            return posts.get($stateParams.id);
+          }]
+        }
       });
       // what to do for everything else
       $urlRouterProvider.otherwise('home'); // Routes all bad paths to home

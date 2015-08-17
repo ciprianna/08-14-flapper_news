@@ -3,11 +3,11 @@ angular.module('flapperNews')
 // from the defined states above in the .config block), and posts (from factory)
 .controller('PostsCtrl', [
   '$scope',
-  '$stateParams',
   'posts',
-  function($scope, $stateParams, posts){
-    // Set the scope's single post to the id from params
-    $scope.post = posts.posts[$stateParams.id];
+  'post',
+  function($scope, posts, post){
+    // Set the scope's single post to the post found from the post state
+    $scope.post = post;
     // scope function to add a comment
     $scope.addComment = function(){
       // if empty, don't add the comment
