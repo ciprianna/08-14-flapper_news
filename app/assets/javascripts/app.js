@@ -13,13 +13,13 @@ angular.module('flapperNews', ['ui.router', 'templates'])
     $stateProvider
       .state('home', {
         url: "/home",
-        templateUrl: "/home.html",
+        templateUrl: "home/_home.html",
         controller: 'MainCtrl'
       })
       // sets up posts state
       .state('posts', {
         url: '/posts/{id}', // Single bracket means the id is a param
-        templateUrl: '/posts.html',
+        templateUrl: 'posts/_posts.html',
         controller: 'PostsCtrl'
       });
       // what to do for everything else

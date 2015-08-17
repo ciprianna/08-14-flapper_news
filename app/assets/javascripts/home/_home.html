@@ -1,0 +1,41 @@
+<!-- template for home page -->
+<script type="text/ng-template" id="/home.html">
+  <div class="page-header">
+    <h1>Flapper News</h1>
+  </div>
+
+  <!-- // listing of all posts, ordered by most upvotes -->
+  <div ng-repeat="post in posts | orderBy: '-upvotes'">
+    <!-- // upvotes incremented by clicking on thumbs up icon -->
+    <span class="glyphicon glyphicon-thumbs-up" ng-click="incrementUpvotes(post)"></span>
+    <!-- // number of upvotes for a given post -->
+    {{ post.upvotes }}
+    <span style="font-size:20px; margin-left:10px;">
+      <!-- // makes the title an active link if a link exists -->
+      <a ng-show="post.link" href="{{ post.link }}">{{post.title}}</a>
+      <!-- // hides link style if no link exists -->
+      <span ng-hide="post.link">
+        {{post.title}}
+      </span>
+    </span>
+
+    <!-- // links to the show page for a given post, by index number; -->
+    <!-- // index determined by ng-repeat method when posts are listed -->
+    <span>
+      <a href="#/posts/{{$index}}">Comments</a>
+    </span>
+  </div>
+
+  <!-- // Form to submit a new post -->
+  <form ng-submit="addPost()" style="margin-top:30px;">
+    <h3>Add a new post</h3>
+    <div class="form-group">
+      <input class="form-control" type="text" placeholder="Title" ng-model="title">
+    </div>
+    <div class="form-group">
+      <input class="form-control" type="text" placeholder="Link" ng-model="link">
+    </div>
+    <!-- // Buttons uses app.js's addPost method -->
+    <button class="btn btn-primary" ng-click="addPost()">Post</button>
+  </form>
+</script>

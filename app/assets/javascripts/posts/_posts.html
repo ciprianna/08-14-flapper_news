@@ -1,0 +1,35 @@
+<!-- Posts template -->
+<script type="text/ng-template" id="/posts.html">
+  <div class="page-header">
+    <h3>
+    <!-- //if a link is given, makes the title of the post an active link -->
+      <a ng-show="post.link" href="{{post.link}}">
+        {{post.title}}
+      </a>
+      <span ng-hide="post.link">
+        {{post.title}}
+      </span>
+    </h3>
+  </div>
+
+  <!-- // post comments listed in descending order by upvotes -->
+  <div ng-repeat="comment in post.comments | orderBy: '-upvotes'">
+    <!-- // can click on thumbs-up icon to increment the upvotes -->
+    <span class="glyphicon glyphicon-thumbs-up" ng-click="incrementUpvotes(comment)"></span>
+    <!-- // a comment's votes and author -->
+    {{comment.upvotes}} - by {{comment.author}}
+    <span style="font-size: 20px; margin-left: 10px;">
+      <!-- // content -->
+      {{comment.body}}
+    </span>
+  </div>
+
+  <!-- // form to add a comment to a post -->
+  <form ng-submit="addComment()" style="margin-top:30px">
+    <h3>Add a new comment</h3>
+    <div class="form-group">
+      <input type="text" class="form-control" placeholder="Comment" ng-model="body">
+    </div>
+    <button type="submit" class="btn btn-primary">Post</button>
+  </form>
+</script>
