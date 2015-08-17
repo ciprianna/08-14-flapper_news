@@ -1,5 +1,5 @@
 // creates the module and names it flapperNews; injects (reliant upon) the ui.router import
-angular.module('flapperNews', ['ui.router', 'templates'])
+angular.module('flapperNews', ['ui.router', 'templates', 'Devise'])
 // config used for the 'states', or the route handling using ui.router
 .config([
   // import these variables to use in a function
