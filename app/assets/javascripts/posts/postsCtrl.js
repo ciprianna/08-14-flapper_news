@@ -12,13 +12,13 @@ angular.module('flapperNews')
     $scope.addComment = function(){
       // if empty, don't add the comment
       if($scope.body === '') {return;}
-      // push the comment to the identified post's comments
-      $scope.post.comments.push({
+      posts.addComment(post.id, {
         // Assign the comment's body from the scope.body (defined in model)
         body: $scope.body,
         // Assign the author as the user
         author: 'user',
-        upvotes: 0
+      }).success(function(comment){
+        $scope.post.comments.push(comment);
       });
       // Reset the input to empty
       $scope.body = '';
