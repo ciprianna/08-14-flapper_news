@@ -39,3 +39,5 @@ gem 'sprockets', '2.12.3'
 gem 'angular-rails-templates'
 
 gem 'responders'
+
+gem 'angular_rails_csrf'
