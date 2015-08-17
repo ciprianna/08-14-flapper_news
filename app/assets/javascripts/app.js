@@ -26,13 +26,7 @@ angular.module('flapperNews', ['ui.router', 'templates'])
       $urlRouterProvider.otherwise('home'); // Routes all bad paths to home
   }
 ])
-// a service that will be injected into the MainCtrl; defines an empty array for posts
-.factory('posts', [function(){
-  var o = {
-    posts: []
-  };
-  return o;
-}])
+
 // Controller (should generally be slim), called MainCtrl; relies on two params
 // $scope (where the model is) and posts (from the factory/service)
 .controller('MainCtrl', [
