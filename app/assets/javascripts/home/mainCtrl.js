@@ -25,7 +25,7 @@ angular.module('flapperNews')
     };
     // $scope function to add one to the upvote count
     $scope.incrementUpvotes = function(post){
-      post.upvotes += 1;
+      posts.upvote(post);
     }
   }
 ]);
